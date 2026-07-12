@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>School Works — BSCS-DS 3A Sched</title>
+<meta name="description" content="Open assignments for BSCS-DS 3A, sorted by deadline.">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/schoolworks.css">
+</head>
+<body>
+
+<canvas id="cyberBg"></canvas>
+
+<nav class="site-nav">
+  <div class="site-nav__inner">
+    <a href="index.html" class="brand">
+      <span class="brand__mark">BSCS-DS 3A Sched</span>
+      <span class="brand__tag">by cx</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Schedule</a>
+      <a href="schoolworks.html" class="nav-link is-active">School Works</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <h1>School works</h1>
+</header>
+
+<main class="works-shell">
+  <div class="works-toolbar">
+    <div class="works-filter" id="worksFilter"></div>
+  </div>
+  <div class="works-list" id="worksList"></div>
+  <div class="empty-note" id="emptyNote" style="display:none;">
+    Nothing posted for this course yet.
+  </div>
+</main>
+
+<footer class="site-footer">
+  <span>BSCS-DS 3A Sched · <a href="index.html">Schedule</a></span>
+</footer>
+
+<div class="modal-backdrop" id="workModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="workModalTitle">
+    <button class="modal__close" id="workModalClose" aria-label="Close">✕</button>
+    <div class="modal__eyebrow" id="workModalEyebrow"></div>
+    <h3 id="workModalTitle"></h3>
+    <div class="modal__time" id="workModalDeadline"></div>
+    <div class="modal__desc" id="workModalDesc"></div>
+  </div>
+</div>
+
+<script src="js/cyber-bg.js"></script>
+<script src="js/toast.js"></script>
+<script src="js/schoolworks.js"></script>
+</body>
+</html>
