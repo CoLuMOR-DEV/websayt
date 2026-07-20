@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BSCS-DS 3A Sched</title>
+<meta name="description" content="Weekly class schedule for BSCS-DS 3A.">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/schedule.css">
+</head>
+<body>
+
+<canvas id="cyberBg"></canvas>
+
+<nav class="site-nav">
+  <div class="site-nav__inner">
+    <a href="index.html" class="brand">
+      <span class="brand__mark">BSCS-DS 3A Sched</span>
+      <span class="brand__tag">by cx</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link is-active">Schedule</a>
+      <a href="schoolworks.html" class="nav-link">School Works</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <h1>This week's schedule</h1>
+  <div class="hero__meta">
+    <span><strong id="todayLabel"></strong></span>
+    <span><span class="block__meet-dot"></span> live session</span>
+  </div>
+</header>
+
+<main class="grid-shell">
+  <div class="day-tabs" id="dayTabs"></div>
+  <div class="grid-card">
+    <div class="schedule-scroll">
+      <div class="schedule-grid" id="scheduleGrid"></div>
+    </div>
+    <div class="agenda-list" id="agendaList" style="display:none;"></div>
+    <div class="empty-note" id="emptyNote" style="display:none;">
+      No classes have been scheduled yet. Check back soon.
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <span>BSCS-DS 3A Sched · <a href="schoolworks.html">School Works</a></span>
+</footer>
+
+<div class="modal-backdrop" id="classModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal__close" id="modalClose" aria-label="Close">✕</button>
+    <div class="modal__eyebrow" id="modalEyebrow"></div>
+    <h3 id="modalTitle"></h3>
+    <div class="modal__time" id="modalTime"></div>
+    <div class="modal__actions">
+      <a class="btn btn-primary" id="modalJoin" href="#" target="_blank" rel="noopener noreferrer">Join Google Meet →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('todayLabel').textContent = new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
+</script>
+<script src="js/cyber-bg.js"></script>
+<script src="js/toast.js"></script>
+<script src="js/schedule.js"></script>
+</body>
+</html>

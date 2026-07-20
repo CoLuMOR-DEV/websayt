@@ -1,0 +1,122 @@
+[
+  {
+    "id": "sch_001",
+    "day": "MON",
+    "startTime": "08:00",
+    "endTime": "10:00",
+    "courseCode": "CS 3114",
+    "courseName": "Software Engineering 1",
+    "meetLink": "",
+    "color": "#F2F2F2"
+  },
+  {
+    "id": "sch_002",
+    "day": "MON",
+    "startTime": "10:00",
+    "endTime": "12:00",
+    "courseCode": "CC 3105",
+    "courseName": "Applications Development and Emerging Technologies",
+    "meetLink": "",
+    "color": "#D6D6D6"
+  },
+  {
+    "id": "sch_003",
+    "day": "MON",
+    "startTime": "13:00",
+    "endTime": "15:00",
+    "courseCode": "CS 3113",
+    "courseName": "Architecture and Organization",
+    "meetLink": "",
+    "color": "#BABABA"
+  },
+  {
+    "id": "sch_004",
+    "day": "MON",
+    "startTime": "15:00",
+    "endTime": "16:00",
+    "courseCode": "CS 3115",
+    "courseName": "Information Assurance and Security",
+    "meetLink": "",
+    "color": "#9E9E9E"
+  },
+  {
+    "id": "sch_005",
+    "day": "TUE",
+    "startTime": "10:00",
+    "endTime": "12:00",
+    "courseCode": "CS 3112",
+    "courseName": "Automata Theory and Formal Languages",
+    "meetLink": "",
+    "color": "#828282"
+  },
+  {
+    "id": "sch_006",
+    "day": "TUE",
+    "startTime": "14:00",
+    "endTime": "16:00",
+    "courseCode": "DS-3101",
+    "courseName": "Data Mining and Data Warehousing",
+    "meetLink": "",
+    "color": "#666666"
+  },
+  {
+    "id": "sch_007",
+    "day": "WED",
+    "startTime": "10:00",
+    "endTime": "13:00",
+    "courseCode": "DS-3101",
+    "courseName": "Data Mining and Data Warehousing",
+    "meetLink": "",
+    "color": "#666666"
+  },
+  {
+    "id": "sch_008",
+    "day": "WED",
+    "startTime": "16:00",
+    "endTime": "19:00",
+    "courseCode": "CS 3112",
+    "courseName": "Automata Theory and Formal Languages",
+    "meetLink": "",
+    "color": "#828282"
+  },
+  {
+    "id": "sch_009",
+    "day": "THU",
+    "startTime": "10:00",
+    "endTime": "13:00",
+    "courseCode": "CS 3113",
+    "courseName": "Architecture and Organization",
+    "meetLink": "",
+    "color": "#BABABA"
+  },
+  {
+    "id": "sch_010",
+    "day": "THU",
+    "startTime": "16:00",
+    "endTime": "19:00",
+    "courseCode": "CC 3105",
+    "courseName": "Applications Development and Emerging Technologies",
+    "meetLink": "",
+    "color": "#D6D6D6"
+  },
+  {
+    "id": "sch_011",
+    "day": "FRI",
+    "startTime": "13:00",
+    "endTime": "15:00",
+    "courseCode": "CS 3115",
+    "courseName": "Information Assurance and Security",
+    "meetLink": "",
+    "color": "#9E9E9E"
+  },
+  {
+    "id": "sch_012",
+    "day": "FRI",
+    "startTime": "16:00",
+    "endTime": "19:00",
+    "courseCode": "CS 3114",
+    "courseName": "Software Engineering 1",
+    "meetLink": "",
+    "color": "#F2F2F2"
+  }
+]
