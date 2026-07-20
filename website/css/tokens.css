@@ -1,0 +1,385 @@
+/* ===========================================================
+   Design tokens — "BSCS-DS 3A Sched" system
+   Pure black & white "sigilism": ink-black backdrop, a single
+   ornate white linework sigil (thorned wings + blade) drifting
+   behind everything. No color — only black, white, and gray.
+   =========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Color — strictly grayscale */
+  --void: #050505;
+  --void-raised: #0c0c0c;
+  --panel: #121212;
+  --panel-raised: #191919;
+  --ink: #F2F2F2;
+  --ink-soft: #96969C;
+  --line: #262626;
+  --line-strong: #3a3a3a;
+
+  /* These names are kept for backwards-compatibility with the rest of
+     the codebase, but every one of them now resolves to white/gray —
+     there is no hue anywhere in the palette. */
+  --cyan: #FFFFFF;
+  --cyan-deep: #D6D6D6;
+  --violet: #FFFFFF;
+  --violet-deep: #C6C6C6;
+  --magenta: #FFFFFF;
+
+  /* Danger stays a true red — this is a functional/semantic color for
+     destructive actions (stop bot, delete entry), not decoration. */
+  --danger: #FF5C7A;
+  --danger-bg: rgba(255, 92, 122, 0.12);
+
+  /* Backwards-compatible aliases used by a couple of older components */
+  --paper: var(--void);
+  --paper-raised: var(--panel);
+  --green: var(--cyan-deep);
+  --green-deep: var(--violet-deep);
+  --rust: var(--danger);
+  --marigold: var(--violet);
+  --marigold-soft: rgba(255, 255, 255, 0.12);
+  --blue: var(--cyan);
+
+  /* Type */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Radius / shadow */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 20px rgba(0, 0, 0, 0.35);
+  --shadow-raised: 0 2px 4px rgba(0, 0, 0, 0.5), 0 14px 34px rgba(0, 0, 0, 0.45);
+  --glow-cyan: 0 0 18px rgba(255, 255, 255, 0.22);
+  --glow-violet: 0 0 18px rgba(255, 255, 255, 0.16);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+a { color: inherit; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.mono { font-family: var(--font-mono); }
+
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Sigil background canvas ---------- */
+#cyberBg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--void);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line-strong);
+  background: var(--panel-raised);
+  color: var(--ink);
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.btn:hover { box-shadow: var(--glow-cyan); border-color: var(--cyan-deep); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--cyan-deep), var(--violet-deep));
+  border-color: transparent;
+  color: #050505;
+  font-weight: 700;
+}
+.btn-primary:hover { box-shadow: 0 6px 22px rgba(124, 92, 255, 0.4); }
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.btn-danger {
+  background: var(--danger-bg);
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.btn-sm { padding: 6px 12px; font-size: 13px; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* ---------- Nav ---------- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(6, 7, 12, 0.72);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.site-nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  max-width: 1180px;
+  margin: 0 auto;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--ink);
+  min-width: 0;
+}
+.brand__mark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  background: linear-gradient(120deg, var(--cyan), var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+}
+.brand__tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.nav-links {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.nav-link {
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--ink-soft);
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid transparent;
+}
+.nav-link:hover { color: var(--ink); background: var(--panel); }
+.nav-link.is-active {
+  color: var(--ink);
+  background: var(--panel);
+  border-color: var(--line-strong);
+  box-shadow: var(--glow-cyan);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--line);
+  margin-top: 64px;
+  padding: 24px 24px 36px;
+  color: var(--ink-soft);
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.site-footer a { color: var(--ink-soft); }
+
+/* ---------- Modal (shared: schedule + school works detail popups) ---------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 7, 12, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.modal-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal {
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  max-width: 420px;
+  width: 100%;
+  padding: 28px;
+  box-shadow: var(--shadow-raised);
+  position: relative;
+  transform: translateY(28px);
+  opacity: 0;
+  transition: transform 0.32s cubic-bezier(0.16, 0.84, 0.44, 1), opacity 0.22s ease;
+}
+.modal-backdrop.is-open .modal {
+  transform: translateY(0);
+  opacity: 1;
+}
+.modal__close {
+  position: absolute;
+  top: 16px; right: 16px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--ink-soft);
+  padding: 4px 8px;
+}
+.modal__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.modal h3 {
+  font-size: 22px;
+  margin-top: 6px;
+  color: var(--ink);
+}
+.modal__time {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.modal__meta {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}
+
+/* ---------- Class-type pill (Face-to-Face / Online Class) — shared by
+   the schedule grid, agenda list, and the class detail modal ---------- */
+.type-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  border: 1px solid var(--line-strong);
+  color: var(--ink-soft);
+}
+.type-pill::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.type-pill--f2f {
+  color: var(--ink);
+  border-color: var(--ink-soft);
+}
+.type-pill--online {
+  color: var(--ink-soft);
+  border-style: dashed;
+}
+.modal__desc {
+  margin-top: 14px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  white-space: pre-wrap;
+}
+.modal__actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 10px;
+}
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: var(--panel-raised);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: var(--shadow-raised);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 100;
+}
+.toast.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.is-error { border-color: var(--danger); color: var(--danger); }

@@ -1,0 +1,291 @@
+.hero {
+  padding: 40px 24px 20px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+.hero h1 {
+  font-size: clamp(26px, 4vw, 38px);
+}
+.hero__meta {
+  margin-top: 14px;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}
+.hero__meta strong { color: var(--ink); }
+
+/* ---------- Grid shell ---------- */
+.grid-shell {
+  max-width: 1180px;
+  margin: 0 auto 60px;
+  padding: 0 24px;
+}
+.grid-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+/* ---------- Day tabs (mobile / narrow only) ---------- */
+.day-tabs {
+  display: none;
+  gap: 6px;
+  overflow-x: auto;
+  margin-bottom: 12px;
+  padding-bottom: 2px;
+}
+.day-tab {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  color: var(--ink-soft);
+}
+.day-tab.is-active {
+  color: var(--void);
+  background: linear-gradient(120deg, var(--cyan), var(--violet));
+  border-color: transparent;
+}
+.day-tab.is-today:not(.is-active) { color: var(--cyan); border-color: var(--cyan-deep); }
+
+.schedule-scroll {
+  overflow-x: auto;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: 68px repeat(7, minmax(112px, 1fr));
+  min-width: 852px;
+  position: relative;
+}
+
+.grid-corner, .day-head {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line-strong);
+  padding: 12px 8px;
+}
+.grid-corner {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: flex-end;
+  border-right: 1px solid var(--line-strong);
+}
+.day-head {
+  text-align: center;
+  border-left: 1px solid var(--line);
+}
+.day-head--first { border-left: none; }
+.day-head__name {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+.day-head.is-today {
+  background: rgba(255, 255, 255, 0.05);
+}
+.day-head.is-today .day-head__name { color: var(--cyan); }
+.day-head__badge {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 9.5px;
+  font-family: var(--font-mono);
+  background: linear-gradient(120deg, var(--cyan-deep), var(--violet-deep));
+  color: #050505;
+  padding: 1px 7px;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.time-col {
+  border-right: 1px solid var(--line-strong);
+}
+.time-row {
+  height: 44px;
+  padding: 0 8px 0 0;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding-top: 3px;
+  line-height: 1;
+}
+
+.day-col {
+  position: relative;
+  border-left: 1px solid var(--line);
+}
+.day-col--first { border-left: none; }
+.day-col.is-today { background: rgba(255, 255, 255, 0.035); }
+.slot-row {
+  height: 44px;
+  border-bottom: 1px solid var(--line);
+}
+.slot-row:nth-child(2n) { background: rgba(255, 255, 255, 0.015); }
+
+.now-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 0;
+  border-top: 2px solid var(--magenta);
+  z-index: 2;
+}
+.now-line::before {
+  content: '';
+  position: absolute;
+  left: -5px; top: -4px;
+  width: 8px; height: 8px;
+  background: var(--magenta);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--magenta);
+}
+
+.block {
+  position: absolute;
+  left: 4px; right: 4px;
+  border-radius: 8px;
+  padding: 6px 8px;
+  border-left: 3px solid var(--cyan);
+  background: var(--panel-raised);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  cursor: pointer;
+  overflow: hidden;
+  text-align: left;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  z-index: 1;
+}
+.block:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--glow-cyan);
+  z-index: 5;
+}
+.block__code {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 11px;
+  color: var(--ink);
+}
+.block__name {
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-top: 1px;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.block__time {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+.block__meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  color: var(--ink-soft);
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.block__meet-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 6px var(--cyan);
+  display: inline-block;
+  margin-right: 5px;
+}
+
+/* ---------- Agenda list (mobile fallback for the grid) ---------- */
+.agenda-list {
+  padding: 6px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.agenda-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--cyan);
+  background: var(--panel-raised);
+  text-align: left;
+  color: var(--ink);
+  width: 100%;
+}
+.agenda-item__time {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  flex-shrink: 0;
+  min-width: 78px;
+}
+.agenda-item__code {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--ink);
+}
+.agenda-item__name {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+.agenda-item__meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-top: 5px;
+}
+
+.empty-note {
+  padding: 60px 24px;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+/* Modal styles live in tokens.css (shared with schoolworks.css) */
+
+/* ---------- Responsive breakpoints ---------- */
+@media (max-width: 860px) {
+  .day-tabs { display: flex; }
+  .schedule-scroll { display: none; }
+  .agenda-list { display: flex !important; }
+}
+
+@media (max-width: 640px) {
+  .hero { padding: 32px 16px 16px; }
+  .grid-shell { padding: 0 12px; }
+}
