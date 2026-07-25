@@ -1,0 +1,212 @@
+/* ===========================================================
+   Music widget — a small tab pinned just under the nav, always
+   visible so people know the player is there. The player panel
+   itself lives collapsed underneath the tab (max-height: 0) and
+   only expands downward when the dock gets the .is-open class —
+   triggered by moving the mouse near the top of the viewport, or
+   tapping the handle on touch devices. The handle never moves;
+   only the panel slides/grows open and shrinks closed.
+   =========================================================== */
+
+.music-dock {
+  position: fixed;
+  left: 50%;
+  top: var(--music-dock-top, 68px);
+  z-index: 45;
+  width: 320px;
+  max-width: 92vw;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-50%);
+}
+
+.music-panel {
+  order: 2;
+  box-sizing: border-box;
+  background: var(--panel-raised);
+  border: 1px solid var(--line-strong);
+  border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 18px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition: max-height 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.28s ease,
+              padding 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.music-dock.is-open .music-panel {
+  max-height: 260px;
+  opacity: 1;
+  padding: 16px 18px 14px;
+  pointer-events: auto;
+}
+
+.music-panel__row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.music-panel__art {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-soft);
+  overflow: hidden;
+}
+.music-panel__art svg { width: 20px; height: 20px; }
+.music-panel__art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.music-panel__info {
+  min-width: 0;
+  flex: 1;
+}
+.music-panel__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.music-panel__time {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+
+.music-play {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.music-play:hover { border-color: var(--ink-soft); }
+.music-play svg { width: 15px; height: 15px; }
+
+.music-seek,
+.music-volume {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--line-strong);
+  cursor: pointer;
+  outline: none;
+}
+.music-seek::-webkit-slider-thumb,
+.music-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ink);
+  cursor: pointer;
+  margin-top: -4.5px;
+}
+.music-seek::-moz-range-thumb,
+.music-volume::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: var(--ink);
+  cursor: pointer;
+}
+.music-seek::-webkit-slider-runnable-track,
+.music-volume::-webkit-slider-runnable-track { height: 3px; border-radius: 999px; background: var(--line-strong); }
+.music-seek::-moz-range-track,
+.music-volume::-moz-range-track { height: 3px; border-radius: 999px; background: var(--line-strong); }
+
+.music-volume-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.music-mute {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+.music-mute:hover { color: var(--ink); }
+.music-mute svg { width: 16px; height: 16px; }
+
+.music-handle {
+  order: 1;
+  position: relative;
+  align-self: center;
+  width: 64px;
+  height: 32px;
+  border: 1px solid var(--line-strong);
+  border-top: none;
+  background: var(--panel-raised);
+  color: var(--ink-soft);
+  border-radius: 0 0 8px 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+.music-handle:hover { color: var(--ink); }
+.music-handle svg { width: 16px; height: 16px; }
+
+.music-handle__dot {
+  position: absolute;
+  bottom: 4px;
+  right: 13px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green, #4ade80);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.music-handle.is-playing .music-handle__dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (max-width: 480px) {
+  .music-dock { width: 94vw; }
+  .music-panel { padding: 0 14px; }
+  .music-dock.is-open .music-panel { padding: 14px 14px 12px; }
+  .music-panel__art { width: 44px; height: 44px; }
+}
