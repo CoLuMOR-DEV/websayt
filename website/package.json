@@ -1,0 +1,19 @@
+{
+  "name": "bscs-ds-3a-sched",
+  "version": "2.0.0",
+  "private": true,
+  "description": "BSCS-DS 3A Sched — a class schedule board, School Works board, and password-protected admin panel with a built-in Discord bot manager. Runs locally with plain Node, no Vercel CLI required.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "hash-password": "node scripts/hash-password.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
