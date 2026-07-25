@@ -1,0 +1,190 @@
+/* ===========================================================
+   Music widget — a small always-there dock tucked at the bottom
+   of the screen. Closed by default — only the handle tab pokes
+   up above the bottom edge. Moving the mouse near the bottom of
+   the viewport (or tapping the handle on touch devices) slides
+   it up; moving away (or tapping again) slides it back down —
+   the same idea as the camera monitor in FNAF2.
+   =========================================================== */
+
+.music-dock {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  z-index: 45;
+  width: 300px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  transform: translate(-50%, calc(100% - 30px));
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.music-dock.is-open {
+  transform: translate(-50%, 0);
+}
+
+.music-panel {
+  background: var(--panel-raised);
+  border: 1px solid var(--line-strong);
+  border-bottom: none;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: 14px 16px 12px;
+  box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.music-panel__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.music-panel__art {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-soft);
+  overflow: hidden;
+}
+.music-panel__art svg { width: 18px; height: 18px; }
+
+.music-panel__info {
+  min-width: 0;
+  flex: 1;
+}
+.music-panel__title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.music-panel__time {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-soft);
+  margin-top: 1px;
+}
+
+.music-play {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.music-play:hover { border-color: var(--ink-soft); }
+.music-play svg { width: 14px; height: 14px; }
+
+.music-seek,
+.music-volume {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--line-strong);
+  cursor: pointer;
+  outline: none;
+}
+.music-seek::-webkit-slider-thumb,
+.music-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--ink);
+  cursor: pointer;
+  margin-top: -4px;
+}
+.music-seek::-moz-range-thumb,
+.music-volume::-moz-range-thumb {
+  width: 11px;
+  height: 11px;
+  border: none;
+  border-radius: 50%;
+  background: var(--ink);
+  cursor: pointer;
+}
+.music-seek::-webkit-slider-runnable-track,
+.music-volume::-webkit-slider-runnable-track { height: 3px; border-radius: 999px; background: var(--line-strong); }
+.music-seek::-moz-range-track,
+.music-volume::-moz-range-track { height: 3px; border-radius: 999px; background: var(--line-strong); }
+
+.music-volume-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.music-mute {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+.music-mute:hover { color: var(--ink); }
+.music-mute svg { width: 15px; height: 15px; }
+
+.music-handle {
+  position: relative;
+  align-self: center;
+  width: 60px;
+  height: 30px;
+  border: 1px solid var(--line-strong);
+  border-bottom: none;
+  background: var(--panel-raised);
+  color: var(--ink-soft);
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+.music-handle:hover { color: var(--ink); }
+.music-handle svg { width: 15px; height: 15px; }
+
+.music-handle__dot {
+  position: absolute;
+  top: 4px;
+  right: 12px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green, #4ade80);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.music-handle.is-playing .music-handle__dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (max-width: 480px) {
+  .music-dock { width: 94vw; }
+}
